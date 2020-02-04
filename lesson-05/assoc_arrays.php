@@ -20,6 +20,24 @@ $products = [
     ["title" => "Лак для мебели", "price" => 250, "oldPrice" => 300, "uom" => "л.", "onStock" => true, "onSale" => true],
 ];
 
+$availableItemsCount = 0;
+$availableItemsSum = 0;
+$discountItems = 0;
+
+foreach ($products as $product) {
+  if ($product["onStock"]) {
+    $availableItemsCount++;
+    $availableItemsSum += $product["price"];
+  }
+
+  if ($product["onSale"]) {
+    $discountItems++;
+  }
+}
+
+echo "Кол-во товаров со скидкой: $discountItems, а средняя стоимость товаров в наличии: " . ($availableItemsSum / $availableItemsCount);
+
+
 echo "<table border='1' cellspacing='0' cellpadding='8'>";
 echo "<tr><th>Название</th><th>Цена</th><th>Наличие</th></tr>";
 foreach ($products as $product) {
