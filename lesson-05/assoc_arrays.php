@@ -68,8 +68,16 @@ echo "</table>";
             } else {
                 $onStock = "Отсутствует";
             }
+
+            if ($product["onSale"]) {
+                $color = "#a00";
+            } else if ($product["onStock"] === false) {
+                $color = "gray";
+            } else {
+                $color = "black";
+            }
         ?>
-            <tr>
+            <tr style="color: <?= $color?>">
                 <td>
                     <?= $product["title"] ?>
                     ( <?= $product["uom"] ?> )
