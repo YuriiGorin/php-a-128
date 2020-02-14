@@ -24,6 +24,28 @@
           $errors[$inputName] = true;
         }
       }
+
+      if (count($errors) === 0) {
+        $handle = fopen("./data.txt", "a");
+        foreach ($users as $user) {
+          $text = $user["name"] . "|" . $user["email"];
+          if (isset($user["subscribe"])) {
+            $text .= "|1";
+          } else {
+            $text .= "|0";
+          }
+
+          // дописываем текст (можно использовать fwrite)
+          fputs($handle, $text . "\n");
+        }
+
+        fclose($handle);
+
+        // если мы сохранили пользователей, то данные в этом массиве нам больше не нужны
+        $users = [];
+        // ну и строки с полями можно не отображать
+        $rowCount = 0;
+      }
     }
   }
 

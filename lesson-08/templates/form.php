@@ -21,11 +21,39 @@
       }
     }
 
+    if (count($users) > 0) {
+      $nameValue = $users[$i]["name"];
+      $emailValue = $users[$i]["email"];
+      if (isset($users[$i]["subscribe"])) {
+        $checked = true;
+      } else {
+        $checked = false;
+      }
+    } else {
+      $nameValue = "";
+      $emailValue = "";
+      $checked = true;
+    }
+
     ?>
-    <input class="<?= $nameError ? "error" : ""?>" name="users[<?=$i?>][name]" type="text">
-    <input class="<?= $emailError ? "error" : ""?>" name="users[<?=$i?>][email]" type="text">
+    <input
+      value="<?= $nameValue?>"
+      class="<?= $nameError ? "error" : ""?>"
+      name="users[<?=$i?>][name]"
+      type="text"
+    >
+    <input
+      value="<?= $emailValue?>"
+      class="<?= $emailError ? "error" : ""?>"
+      name="users[<?=$i?>][email]"
+      type="text"
+    >
     <label>
-      <input name="users[<?=$i?>][subscribe]" type="checkbox">
+      <input
+        <?= $checked ? "checked" : "" ?>
+        name="users[<?=$i?>][subscribe]"
+        type="checkbox"
+      >
       Подписать на рассылку
     </label>
     <hr>
