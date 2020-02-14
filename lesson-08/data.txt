@@ -1,0 +1,3 @@
+Иннокентий|kesha@syktyvkar.ru|0
+Акакий|akak@yandex.ru|1
+Михаил|mihail@gmail.com|1
