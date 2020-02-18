@@ -23,8 +23,14 @@
     }
 
     .visited {
-      background: blue;
+      /*background: blue;*/
+      animation: visitAnim 0.5s forwards step-start;
     }
+
+    @keyframes visitAnim {
+      to { background: #ff0 }
+    }
+
   </style>
 </head>
 <body>
@@ -69,29 +75,38 @@
             if ($dir === "N") {
               for ($j=$y+1; $j<=$y+$steps; $j++) {
                 $field[$offset - $j][$x + $offset]["visits"]++;
-                $counter++;
-                $field[$offset - $j][$x + $offset]["order"] = $counter;
+                if ($field[$offset - $j][$x + $offset]["order"] === 0) {
+                  $counter++;
+                  $field[$offset - $j][$x + $offset]["order"] = $counter;
+                }
               }
               $y += $steps;
             } else if ($dir === "S") {
               for ($j=$y-1; $j>=$y-$steps; $j--) {
                 $field[$offset - $j][$x + $offset]["visits"]++;
-                $counter++;
-                $field[$offset - $j][$x + $offset]["order"] = $counter;
+                if ($field[$offset - $j][$x + $offset]["order"] === 0) {
+                  $counter++;
+                  $field[$offset - $j][$x + $offset]["order"] = $counter;
+                }
               }
               $y -= $steps;
             } else if ($dir === "E") {
               for ($j=$x+1; $j<=$x+$steps; $j++) {
                 $field[$offset - $y][$j + $offset]["visits"]++;
-                $counter++;
-                $field[$offset - $y][$j + $offset]["order"] = $counter;
+                if ($field[$offset - $y][$j + $offset]["order"] === 0) {
+                  $counter++;
+                  $field[$offset - $y][$j + $offset]["order"] = $counter;
+                }
+
               }
               $x += $steps;
             } else {
               for ($j=$x-1; $j>=$x-$steps; $j--) {
                 $field[$offset - $y][$j + $offset]["visits"]++;
-                $counter++;
-                $field[$offset - $y][$j + $offset]["order"] = $counter;
+                if ($field[$offset - $y][$j + $offset]["order"] === 0) {
+                  $counter++;
+                  $field[$offset - $y][$j + $offset]["order"] = $counter;
+                }
               }
               $x -= $steps;
             }
@@ -129,12 +144,14 @@
         }
 
         if ($visits > 0) {
-          $class = "visited";
+          $class .= " visited";
         }
 
-        echo "<td class='$class'>";
+        $dur = round($field[$i][$j]["order"] * 0.1, 2);
+
+        echo "<td class='$class' style='animation-duration: {$dur}s; animation-delay: {$dur}s'>";
         if ($visits > 0) {
-          echo $visits;
+          //echo $visits;
         }
         echo "</td>";
       }
