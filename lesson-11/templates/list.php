@@ -1,21 +1,22 @@
 <h1 class="my-4">Список студентов</h1>
 <form action="/lesson-11/index.php">
-  <div class="card">
+  <div class="card mb-4">
     <div class="card-body">
       <div class="row">
         <div class="col-sm-3">
           <div class="form-group">
             <label for="min">Возраст от</label>
-            <input id="min" type="text" class="form-control">
+            <input value="<?= $min?>" name="min" id="min" type="text" class="form-control">
           </div>
         </div>
         <div class="col-sm-3">
-
-        </div>
-        <div class="col-sm-3">
-
+          <div class="form-group">
+            <label for="max">Возраст до</label>
+            <input value="<?= $max?>" name="max" id="max" type="text" class="form-control">
+          </div>
         </div>
       </div>
+      <button type="submit" class="btn btn-primary">Найти</button>
     </div>
   </div>
 </form>
