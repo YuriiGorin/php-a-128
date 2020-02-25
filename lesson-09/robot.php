@@ -28,7 +28,7 @@
     }
 
     @keyframes visitAnim {
-      to { background: #ff0 }
+      to { background: #f00 }
     }
 
   </style>
