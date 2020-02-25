@@ -20,23 +20,33 @@
     </div>
   </div>
 </form>
-<table class="table table-bordered table-hover">
-  <tr>
-    <th>Имя</th>
-    <th>Возраст</th>
-    <th>IQ</th>
-    <th>Стипендия</th>
-  </tr>
-  <?php
-    foreach ($students as $student) {
-      ?>
+<?php
+  if (count($students) > 0) {
+    ?>
+    <table class="table table-bordered table-hover">
       <tr>
-        <td><?= $student["firstName"] . " " . $student["lastName"]?></td>
-        <td><?= $student["age"]?></td>
-        <td><?= $student["iq"]?></td>
-        <td><?= $student["salary"]?></td>
+        <th>Имя</th>
+        <th>Возраст</th>
+        <th>IQ</th>
+        <th>Стипендия</th>
       </tr>
       <?php
-    }
-  ?>
-</table>
+        foreach ($students as $student) {
+          ?>
+          <tr>
+            <td><?= $student["firstName"] . " " . $student["lastName"] ?></td>
+            <td><?= $student["age"] ?></td>
+            <td><?= $student["iq"] ?></td>
+            <td><?= $student["salary"] ?></td>
+          </tr>
+          <?php
+        }
+      ?>
+    </table>
+    <?php
+  } else {
+    ?>
+      <div class="alert alert-info">Не удалось найти ни одного студента</div>
+    <?php
+  }
+?>
