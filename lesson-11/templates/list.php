@@ -1,5 +1,6 @@
 <h1 class="my-4">Список студентов</h1>
-<form action="/lesson-11/index.php">
+<a href="/lesson-11/add.php" class="btn btn-warning">Добавить пользователя</a>
+<form class="mt-4" action="/lesson-11/index.php">
   <div class="card mb-4">
     <div class="card-body">
       <div class="row">
