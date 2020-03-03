@@ -15,6 +15,11 @@
     if (checkRequiredFields(['a', 'b'])) {
       $a = post('a');
       $b = post('b');
+
+      if (is_numeric($a) && is_numeric($b)) {
+        $c = $a + $b;
+        echo "<p>Результат расчета: $c</p>";
+      }
     } else {
       echo "Заполните корректную форму!";
     }
