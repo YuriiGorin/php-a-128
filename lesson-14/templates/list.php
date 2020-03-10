@@ -3,17 +3,31 @@
   <div class="card-body">
     <div class="form-group">
       <label>Имя автора</label>
-      <input name="author" type="text" class="form-control">
+      <input name="author" type="text" class="form-control" value="<?= $author?>">
     </div>
     <div class="form-group">
       <label>Контент</label>
-      <input name="content" type="text" class="form-control">
+      <input name="content" type="text" class="form-control" value="<?= $content?>">
     </div>
     <div class="radio">
-      <label class="mr-2"><input type="radio" name="sort" value="asc"> Сначала новые </label>
-      <label><input type="radio" name="sort" value="desc"> Сначала старые </label>
+      <label class="mr-2">
+        <input type="radio" <?= $sortType === "desc" ? "checked" : ""?> name="sort" value="desc">
+        Сначала новые
+      </label>
+      <label>
+        <input type="radio" <?= $sortType === "asc" ? "checked" : ""?> name="sort" value="asc">
+        Сначала старые
+      </label>
     </div>
   </div>
+  <?php
+    if ($pageName === "index-archive") {
+    ?>
+      <input type="hidden" name="only-archive" value="true">
+    <?php
+    }
+  ?>
+
   <div class="card-footer">
     <button type="submit" class="btn btn-info">Найти записи</button>
     <a href="/lesson-14/" type="submit" class="btn btn-outline-secondary">Сбросить</a>
@@ -46,6 +60,17 @@
       </div>
       <?php
     }
+    ?>
+    <ul class="pagination">
+      <?php
+        for ($i=1; $i<=$pagesCount; $i++) {
+          ?>
+          <li class="page-item"><a href="?page=<?=$i?>" class="page-link"><?=$i?></a></li>
+          <?php
+        }
+      ?>
+    </ul>
+    <?php
   } else {
     ?>
       <div class="alert alert-warning">Список постов пуст :(</div>

@@ -12,6 +12,13 @@
     $pageName .= "-archive";
   }
 
+  $result = mysqli_query($connect, "SELECT COUNT(*) AS rowsCount FROM `microblog`");
+  $arrResult = mysqli_fetch_assoc($result);
+  $rowsCount = $arrResult["rowsCount"];
+
+  $postsOnPage = 5;
+  $pagesCount = ceil($rowsCount / $postsOnPage);
+
   $author = get("author");
   $content = get("content");
   $sort = get("sort");
@@ -26,7 +33,12 @@
     }
   }
 
-  $sql = "SELECT * FROM microblog WHERE status='$status' $filter ORDER BY id DESC";
+  $sortType = "desc";
+  if (get("sort")) {
+    $sortType = get("sort");
+  }
+
+  $sql = "SELECT * FROM microblog WHERE status='$status' $filter ORDER BY id $sortType";
   $result = mysqli_query($connect, $sql);
   if (!$result) {
     die("Ошибка выполнения запроса");
