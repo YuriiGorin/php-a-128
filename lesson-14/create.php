@@ -1,5 +1,6 @@
 <?php
   include "./inc/db.php";
+  include "./inc/utils.php";
 
   $pageTitle = "Добавить пост";
   $pageName = "add";
@@ -10,10 +11,10 @@
   $author = "";
   $content = "";
 
-  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST["author"]) && isset($_POST["content"])) {
-      $author = $_POST["author"];
-      $content = $_POST["content"];
+  if (isPostRequest()) {
+    if (checkRequiredFields(["content", "author"])) {
+      $author = post("author");
+      $content = post("content");
 
       if ($author !== "" && $content !== "") {
         $sql = "INSERT INTO microblog SET author='$author', content='$content'";

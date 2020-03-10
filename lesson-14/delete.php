@@ -1,11 +1,12 @@
 <?php
   include "./inc/db.php";
+  include "./inc/utils.php";
 
   $pageTitle = "Удаление поста";
   $pageName = "delete";
 
-  if (isset($_GET["id"])) {
-    $id = intval($_GET["id"]);
+  if (get("id")) {
+    $id = intval(get("id"));
     $sql = "DELETE FROM microblog WHERE id=$id";
     $result = mysqli_query($connect, $sql);
     if (!$result) {

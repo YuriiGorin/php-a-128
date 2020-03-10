@@ -1,5 +1,6 @@
 <?php
   include "./inc/db.php";
+  include "./inc/utils.php";
 
   $pageTitle = "Изменить пост";
   $pageName = "edit";
@@ -7,8 +8,8 @@
   $error = "";
   $success = "";
 
-  if (isset($_GET["id"])) {
-    $id = intval($_GET["id"]);
+  if (get("id") > 0) {
+    $id = intval(get("id"));
     $sql = "SELECT * FROM microblog WHERE id=$id";
     $result = mysqli_query($connect, $sql);
     // одна строка в виде ассоциативного массива
@@ -21,10 +22,10 @@
   $author = $post["author"];
   $content = $post["content"];
 
-  if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST["author"]) && isset($_POST["content"])) {
-      $author = $_POST["author"];
-      $content = $_POST["content"];
+  if (isPostRequest()) {
+    if (checkRequiredFields(["content", "author"])) {
+      $author = post("author");
+      $content = post("content");
 
       if ($author !== "" && $content !== "") {
         $sql = "UPDATE microblog SET author='$author', content='$content' WHERE id=$id";

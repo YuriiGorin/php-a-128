@@ -13,12 +13,12 @@
     <h1><?= $pageTitle ?></h1>
     <ul class="nav nav-pills my-4">
       <li class="nav-item">
-        <a href="/lesson-12/" class="nav-link <?= $pageName === "index" ? "active" : "" ?>">Список постов</a>
+        <a href="/lesson-14/" class="nav-link <?= $pageName === "index" ? "active" : "" ?>">Список постов</a>
       </li>
       <li class="nav-item">
-        <a href="/lesson-12/create.php" class="nav-link <?= $pageName === "add" ? "active" : "text-warning" ?>">Добавить пост</a>
+        <a href="/lesson-14/create.php" class="nav-link <?= $pageName === "add" ? "active" : "text-warning" ?>">Добавить пост</a>
       </li>
-      <li class="nav-item"><a href="/lesson-12/archive.php" class="nav-link">Архив</a></li>
+      <li class="nav-item"><a href="/lesson-14/?only-archive=true" class="nav-link <?= $pageName === "index-archive" ? "active" : "" ?>">Архив</a></li>
     </ul>
 
     <?php

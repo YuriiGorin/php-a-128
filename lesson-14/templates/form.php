@@ -1,7 +1,7 @@
 <?php
-  $action = "/lesson-12/create.php";
+  $action = "/lesson-14/create.php";
   if ($pageName === "edit") {
-    $action = "/lesson-12/edit.php?id=$id";
+    $action = "/lesson-14/edit.php?id=$id";
   }
 ?>
 <form action="<?= $action?>" method="post">
