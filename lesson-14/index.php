@@ -18,6 +18,8 @@
 
   $postsOnPage = 5;
   $pagesCount = ceil($rowsCount / $postsOnPage);
+  $pageNumber = get("page") > 1 ? intval(get("page")) : 1;
+  $offset = ($pageNumber - 1) * $postsOnPage;
 
   $author = get("author");
   $content = get("content");
@@ -38,7 +40,7 @@
     $sortType = get("sort");
   }
 
-  $sql = "SELECT * FROM microblog WHERE status='$status' $filter ORDER BY id $sortType";
+  $sql = "SELECT * FROM microblog WHERE status='$status' $filter ORDER BY id $sortType LIMIT $postsOnPage OFFSET $offset";
   $result = mysqli_query($connect, $sql);
   if (!$result) {
     die("Ошибка выполнения запроса");

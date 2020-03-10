@@ -65,7 +65,9 @@
       <?php
         for ($i=1; $i<=$pagesCount; $i++) {
           ?>
-          <li class="page-item"><a href="?page=<?=$i?>" class="page-link"><?=$i?></a></li>
+          <li class="page-item <?= $i === $pageNumber ? "active" : "" ?>">
+            <a href="?page=<?=$i?>" class="page-link"><?=$i?></a>
+          </li>
           <?php
         }
       ?>
