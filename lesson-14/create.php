@@ -25,6 +25,7 @@
           $success = "Запись успешно добавлена!";
           $author = "";
           $content = "";
+          header("Location: /lesson-14/");
         }
       } else {
         $error = "Заполните все поля!";

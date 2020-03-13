@@ -37,10 +37,13 @@
   if (count($posts) > 0) {
     foreach ($posts as $post) {
       $status = $post["status"];
+      $createdAt = strtotime($post["createdAt"]);
       ?>
       <div class="card mb-4 <?= $status === "archive" ? "border-info" : ""?>">
         <div class="card-header">
-          Пост от <strong><?= $post["author"]?></strong> (<?= $post["createdAt"]?>)
+          Пост от <a href="?author=<?= $post["author"]?>"><strong><?= $post["author"]?></strong></a>
+
+          (<?= date("d.m.Y в H:i", $createdAt)?>)
           <?php
             if ($status === "archive") {
               ?>
@@ -71,43 +74,50 @@
       <?php
     }
     ?>
-    <ul class="pagination">
-      <li class="page-item <?= $pageNumber <= 1 ? "disabled" : ""?>">
-        <?php
-          if ($pageNumber > 1) {
-          ?>
-            <a href="<?= getQueryString($currentQueryString, 'page=' . ($pageNumber - 1)) ?>" class="page-link">&laquo;</a>
-          <?php
-          } else {
-          ?>
-            <span class="page-link">&laquo;</span>
-          <?php
-          }
+    <?php
+      if ($pagesCount > 1) {
         ?>
-      </li>
-      <?php
-        for ($i=1; $i<=$pagesCount; $i++) {
-          ?>
-          <li class="page-item <?= $i === $pageNumber ? "active" : "" ?>">
-            <a href="<?= getQueryString($currentQueryString, 'page=' . $i) ?>" class="page-link"><?=$i?></a>
-          </li>
-          <?php
-        }
-      ?>
-      <li class="page-item <?= $pagesCount <= 1 || $pageNumber == $pagesCount ? "disabled" : ""?>">
+          <ul class="pagination">
+            <li class="page-item <?= $pageNumber <= 1 ? "disabled" : ""?>">
+              <?php
+                if ($pageNumber > 1) {
+                ?>
+                  <a href="<?= getQueryString($currentQueryString, 'page=' . ($pageNumber - 1)) ?>" class="page-link">&laquo;</a>
+                <?php
+                } else {
+                ?>
+                  <span class="page-link">&laquo;</span>
+                <?php
+                }
+              ?>
+            </li>
+            <?php
+              for ($i=1; $i<=$pagesCount; $i++) {
+                ?>
+                <li class="page-item <?= $i === $pageNumber ? "active" : "" ?>">
+                  <a href="<?= getQueryString($currentQueryString, 'page=' . $i) ?>" class="page-link"><?=$i?></a>
+                </li>
+                <?php
+              }
+            ?>
+            <li class="page-item <?= $pagesCount <= 1 || $pageNumber == $pagesCount ? "disabled" : ""?>">
+              <?php
+                if ($pageNumber < $pagesCount) {
+                  ?>
+                  <a href="<?= getQueryString($currentQueryString, 'page=' . ($pageNumber + 1)) ?>" class="page-link">&raquo;</a>
+                  <?php
+                } else {
+                  ?>
+                  <span class="page-link">&raquo;</span>
+                  <?php
+                }
+              ?>
+            </li>
+          </ul>
         <?php
-          if ($pageNumber < $pagesCount) {
-            ?>
-            <a href="<?= getQueryString($currentQueryString, 'page=' . ($pageNumber + 1)) ?>" class="page-link">&raquo;</a>
-            <?php
-          } else {
-            ?>
-            <span class="page-link">&raquo;</span>
-            <?php
-          }
-        ?>
-      </li>
-    </ul>
+      }
+    ?>
+
     <?php
   } else {
     ?>

@@ -25,5 +25,8 @@
     die("Please specify post id");
   }
 
+  // функция header изменяет служебные заголовки ответа сервера
+  header("Location: /lesson-14/");
+
   include "./templates/header.php";
   include "./templates/footer.php";

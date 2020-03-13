@@ -11,15 +11,24 @@
 <body>
   <div class="container">
     <h1><?= $pageTitle ?></h1>
-    <ul class="nav nav-pills my-4">
-      <li class="nav-item">
-        <a href="/lesson-14/" class="nav-link <?= $pageName === "index" ? "active" : "" ?>">Список постов</a>
-      </li>
-      <li class="nav-item">
-        <a href="/lesson-14/create.php" class="nav-link <?= $pageName === "add" ? "active" : "text-warning" ?>">Добавить пост</a>
-      </li>
-      <li class="nav-item"><a href="/lesson-14/?only-archive=true" class="nav-link <?= $pageName === "index-archive" ? "active" : "" ?>">Архив</a></li>
-    </ul>
+    <?php
+      if ($pageName !== "404") {
+        ?>
+        <ul class="nav nav-pills my-4">
+          <li class="nav-item">
+            <a href="/lesson-14/" class="nav-link <?= $pageName === "index" ? "active" : "" ?>">Список постов</a>
+          </li>
+          <li class="nav-item">
+            <a href="/lesson-14/create.php" class="nav-link <?= $pageName === "add" ? "active" : "text-warning" ?>">Добавить
+              пост</a>
+          </li>
+          <li class="nav-item">
+            <a href="/lesson-14/?only-archive=true" class="nav-link <?= $pageName === "index-archive" ? "active" : "" ?>">Архив</a>
+          </li>
+        </ul>
+        <?php
+      }
+    ?>
 
     <?php
       if (isset($error) && $error !== "") {
