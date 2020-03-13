@@ -62,15 +62,41 @@
     }
     ?>
     <ul class="pagination">
+      <li class="page-item <?= $pageNumber <= 1 ? "disabled" : ""?>">
+        <?php
+          if ($pageNumber > 1) {
+          ?>
+            <a href="<?= getQueryString($currentQueryString, 'page=' . ($pageNumber - 1)) ?>" class="page-link">&laquo;</a>
+          <?php
+          } else {
+          ?>
+            <span class="page-link">&laquo;</span>
+          <?php
+          }
+        ?>
+      </li>
       <?php
         for ($i=1; $i<=$pagesCount; $i++) {
           ?>
           <li class="page-item <?= $i === $pageNumber ? "active" : "" ?>">
-            <a href="?page=<?=$i?>" class="page-link"><?=$i?></a>
+            <a href="<?= getQueryString($currentQueryString, 'page=' . $i) ?>" class="page-link"><?=$i?></a>
           </li>
           <?php
         }
       ?>
+      <li class="page-item <?= $pagesCount <= 1 || $pageNumber == $pagesCount ? "disabled" : ""?>">
+        <?php
+          if ($pageNumber < $pagesCount) {
+            ?>
+            <a href="<?= getQueryString($currentQueryString, 'page=' . ($pageNumber + 1)) ?>" class="page-link">&raquo;</a>
+            <?php
+          } else {
+            ?>
+            <span class="page-link">&raquo;</span>
+            <?php
+          }
+        ?>
+      </li>
     </ul>
     <?php
   } else {

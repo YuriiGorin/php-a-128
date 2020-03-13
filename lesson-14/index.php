@@ -12,18 +12,25 @@
     $pageName .= "-archive";
   }
 
-  $result = mysqli_query($connect, "SELECT COUNT(*) AS rowsCount FROM `microblog`");
-  $arrResult = mysqli_fetch_assoc($result);
-  $rowsCount = $arrResult["rowsCount"];
-
-  $postsOnPage = 5;
-  $pagesCount = ceil($rowsCount / $postsOnPage);
-  $pageNumber = get("page") > 1 ? intval(get("page")) : 1;
-  $offset = ($pageNumber - 1) * $postsOnPage;
-
   $author = get("author");
   $content = get("content");
   $sort = get("sort");
+
+  $queryStringParams = [];
+  if ($author !== "") {
+    $queryStringParams['author'] = $author;
+  }
+  if ($content !== "") {
+    $queryStringParams['content'] = $content;
+  }
+  if ($sort !== "") {
+    $queryStringParams['sort'] = $sort;
+  }
+  if ($pageName === "index-archive") {
+    $queryStringParams["only-archive"] = true;
+  }
+
+  $currentQueryString = http_build_query($queryStringParams);
 
   $filter = "";
   if ($author !== "" || $content !== "") {
@@ -34,6 +41,15 @@
       $filter .= " AND content LIKE '%$content%'";
     }
   }
+
+  $result = mysqli_query($connect, "SELECT COUNT(*) AS rowsCount FROM microblog WHERE status='$status' $filter ");
+  $arrResult = mysqli_fetch_assoc($result);
+  $rowsCount = $arrResult["rowsCount"];
+
+  $postsOnPage = 5;
+  $pagesCount = ceil($rowsCount / $postsOnPage);
+  $pageNumber = get("page") > 1 ? intval(get("page")) : 1;
+  $offset = ($pageNumber - 1) * $postsOnPage;
 
   $sortType = "desc";
   if (get("sort")) {

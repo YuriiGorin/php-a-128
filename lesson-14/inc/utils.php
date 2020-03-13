@@ -54,3 +54,17 @@
     }
     return null;
   }
+
+  /**
+   * Функция для добавления параметра к адресной строке
+   *
+   * @param string $str строка в формате param=value&key=value
+   * @param string $param строка в формате key=value
+   * @return string строка в формате ?param=value&key=value
+   */
+  function getQueryString(string $str, string $param): string {
+    if ($str !== "") {
+      return "?" . $str . "&" . $param;
+    }
+    return "?" . $param;
+  }
