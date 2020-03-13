@@ -54,8 +54,18 @@
         </div>
         <div class="card-footer text-right">
           <a href="/lesson-14/edit.php?id=<?=$post["id"]?>" class="btn btn-outline-info btn-sm">Изменить пост</a>
-          <a href="/lesson-14/delete.php?id=<?=$post["id"]?>" class="btn btn-danger btn-sm">Удалить пост</a>
-          <a href="/lesson-14/toArchive.php?id=<?=$post["id"]?>" class="btn btn-warning btn-sm">В архив</a>
+          <a href="/lesson-14/setStatus.php?status=deleted&id=<?=$post["id"]?>" class="btn btn-danger btn-sm">Удалить пост</a>
+          <?php
+            if ($pageName === "index") {
+              ?>
+                <a href="/lesson-14/setStatus.php?status=archive&id=<?= $post["id"] ?>" class="btn btn-warning btn-sm">В архив</a>
+              <?php
+            } else {
+              ?>
+              <a href="/lesson-14/setStatus.php?status=active&id=<?= $post["id"] ?>" class="btn btn-warning btn-sm">Восстановить</a>
+              <?php
+            }
+          ?>
         </div>
       </div>
       <?php

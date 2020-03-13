@@ -7,7 +7,7 @@
 
   if (get("id")) {
     $id = intval(get("id"));
-    $sql = "DELETE FROM microblog WHERE id=$id";
+    $sql = "UPDATE microblog SET status='deleted' WHERE id=$id";
     $result = mysqli_query($connect, $sql);
     if (!$result) {
       $error = "Не удалось удалить пост из-за ошибки в БД";
